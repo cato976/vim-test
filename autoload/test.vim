@@ -82,6 +82,9 @@ function! test#execute(runner, args, ...) abort
 
   let executable = test#base#executable(a:runner)
   let args = test#base#build_args(a:runner, args)
+  let sub = args[0]
+  let newArg = substitute(sub,"FullyQualifiedName\\","FullyQualifiedName","")
+  let args[0] = newArg
   let cmd = [executable] + args
   call filter(cmd, '!empty(v:val)')
 
