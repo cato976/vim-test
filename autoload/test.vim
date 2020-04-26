@@ -20,6 +20,9 @@ function! test#run(type, arguments) abort
   let args = a:arguments + args
   let args = test#base#options(runner, args, a:type)
 
+  set errorformat=%E%m\ in\ %#%f:line\ %l
+  set errorformat+=%+W%n\)\ Ignored\ :%m
+
   if type(get(g:, 'test#strategy')) == type({})
     let strategy = get(g:test#strategy, a:type)
     call test#execute(runner, args, strategy)
